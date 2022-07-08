@@ -1,4 +1,5 @@
 from django.db import models
+from cpf_field.models import CPFField
 
 # Create your models here.
 
@@ -18,7 +19,7 @@ class Participante(models.Model):
         
     )
     nome = models.CharField(db_column='nome', max_length=100, blank=False)
-    cpf = models.CharField(db_column='cpf', max_length=14, blank=False, unique=True)
+    cpf = CPFField(db_column='cpf', blank=False, unique=True)
     nascimento = models.DateField(db_column='nascimento', blank=True)
     sexo = models.SmallIntegerField(db_column='sexo', choices=SEXO, blank=False)
     estadocivil = models.SmallIntegerField(db_column='estadocivil', choices=ESTADO_CIVIL, blank=False)
