@@ -1,0 +1,28 @@
+version: '3.9'
+services:
+  mysql:
+    image: mysql:8
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+    ports:
+      - 3306:3306
+    volumes:
+      - ${PWD}/mysql:/var/lib/mysql
+    restart: always
+    hostname: mysql
+
+  retiros:
+    ports:
+      - 8001:8000
+    image: andretapxure/retiros
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
